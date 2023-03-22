@@ -51,7 +51,7 @@ router.post('/webhook', (req, res) => {
   const digest = 'sha1=' + hmac.update(JSON.stringify(req.body)).digest('hex');
   const checksum = req.headers['x-hub-signature'];
   if (!checksum || !digest || checksum !== digest) {
-      return res.status(403).send('Invalid signature');
+      return res.status(403).send('Invalid signature for webhook');
   }
 
   // get current dir
