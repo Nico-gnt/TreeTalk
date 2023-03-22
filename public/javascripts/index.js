@@ -2,6 +2,14 @@ document.getElementById("sendBtn").addEventListener("click", function () {
     sendMessage();
 });
 
+document.getElementById("suppr").addEventListener("click", function () {
+    deleteMessages();
+});
+
+function deleteMessages() {
+    document.getElementById("messages").innerHTML= "";
+}
+
 function appuyerSurEntree(event) {
     if (event.keyCode === 13) {
         sendMessage();
