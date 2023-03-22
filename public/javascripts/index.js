@@ -1,6 +1,10 @@
-document.getElementById("sendBtn").addEventListener("click", function() {
+document.getElementById("sendBtn").addEventListener("click", function () {
+    if(message == "")
+        return;
     var message = document.getElementById("message").value;
-    // fetch the message to url/sendMessage
+    // clear input
+    document.getElementById("message").value = "";
+
     fetch("/sendMessage", {
         method: "POST",
         headers: {
@@ -10,31 +14,32 @@ document.getElementById("sendBtn").addEventListener("click", function() {
             message: message
         })
     })
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(data) {
-        console.log(data);
-    });
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+        });
 });
 
+let messagesList = [];
 
-// get all messages
 fetch("/getMessages", {
     method: "GET",
     headers: {
         "Content-Type": "application/json"
     }
 })
-.then(function(response) {
-    return response.json();
-})
-.then(function(data) {
-    // add to dom in div with id messages
-    var messages = document.getElementById("messages");
-    messages.innerHTML = "";
-    for (var i = 0; i < data.length; i++) {
-        var message = data[i];
-    messages.innerHTML += message + "<br>"
-    }
-});
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        messagesList = data;
+
+        var messages = document.getElementById("messages");
+        messages.innerHTML = "";
+        for (var i = 0; i < messagesList.length; i++) {
+            var message = data[i];
+            messages.innerHTML += message + "<br>"
+        }
+    });

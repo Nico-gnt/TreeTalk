@@ -8,12 +8,10 @@ router.get('/', function(req, res, next) {
 
 
 messages = [];
-// get messages
 router.get('/getMessages', function(req, res, next) {
     res.json(messages);
 });
 
-// post sendMessage
 router.post('/sendMessage', function(req, res, next) {
     var message = req.body.message;
     messages.push(message);
