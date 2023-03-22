@@ -56,6 +56,25 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
+const { Server } = require("socket.io");
+const io = new Server(server);
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
+// do a emit to all connected clients if a new message is received
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+  socket.on('chat message', () => {
+    console.log("sdfsdf")
+    io.emit('chat message');
+  });
+});
+
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
@@ -119,3 +138,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+
