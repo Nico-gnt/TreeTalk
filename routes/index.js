@@ -23,7 +23,7 @@ router.post('/webhook', (req, res) => {
   // remove routes dir
   const dir = currentDir.replace('/routes', '');
   console.log('current dir: ' + currentDir);
-  exec('cd ' + __dirname+ ' && git reset --hard HEAD && git pull && pm2 restart app', (error, stdout, stderr) => {
+  exec('cd /home/ubuntu/back_end_TreeTalk && git reset --hard HEAD && git pull && pm2 restart www', (error, stdout, stderr) => {
       if (error) {
           console.error(`exec error: ${error}`);
           return res.status(500).send(`Error updating app: ${error}`);
