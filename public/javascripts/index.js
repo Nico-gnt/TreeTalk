@@ -54,7 +54,20 @@ function updateMessage() {
             messages.innerHTML = "";
             for (var i = 0; i < messagesList.length; i++) {
                 var message = data[i];
-                messages.innerHTML += message + "<br>"
+                // if in message there is a #text change the color of the #text
+                var hashtag = message.match(/#[a-zA-Z0-9]+/g);
+                console.log(hashtag);
+                if (hashtag != null) {
+                    // hastag is a array replace all the element
+                    for (var x = 0; x < hashtag.length; x++) {
+                        message = message.replace(hashtag[x], `<span class="greenText">${hashtag[x]}</span>`);
+                    }
+                }
+                messages.innerHTML += `<div class="textMessage">
+                    ${message}
+                </div>`
+                
+                 
             }
         });
 }

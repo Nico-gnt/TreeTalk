@@ -70,7 +70,6 @@ io.on('connection', (socket) => {
     console.log('user disconnected');
   });
   socket.on('chat message', () => {
-    console.log("sdfsdf")
     io.emit('chat message');
   });
 });

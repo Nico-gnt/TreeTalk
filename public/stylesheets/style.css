@@ -37,6 +37,7 @@ button {
   overflow-x: hidden;
   border: 2px solid white;
   border-radius: 15px 0 0 15px;
+  padding-bottom: 15px;
 }
 
 #message {
@@ -61,4 +62,22 @@ input {
   color: rgb(0, 0, 0);
   background-color: rgb(255, 255, 255);
   box-shadow: none;
+}
+
+.textMessage{
+  width: 70%;
+  height: 100%;
+  border: none;
+  border-radius: 15px;
+  font-size: 14px;
+  padding: 7px;
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  box-shadow: none;
+  margin-top: 20px;
+  margin-left: 12%;
+}
+
+.greenText {
+  color: rgb(4, 155, 7);
 }
