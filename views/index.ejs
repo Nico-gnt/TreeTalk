@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-    <script defer src="/javascripts/index.js"></script>
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <div>
-      <div>
-        <span>Choisis ton pseudo :</span>
-        <input type="text" name="" id="login" value="Anonyme">
-      </div>
-      <input type="text" name="" id="message">
-      <button id="sendBtn" class="green">send</button>
-    </div> 
-    <div id="messages" >
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script defer src="/javascripts/index.js"></script>
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+  <p>Welcome to <%= title %>
+  </p>
+  <div>
+    <div id="messages">
 
     </div>
-  </body>
+    <div id="boxsendmessage">
+      <span>Choisis ton pseudo :</span>
+      <input type="text" name="" id="login" value="Anonyme">
+      <input type="text" name="" value="Message" id="message">
+      <button id="sendBtn" class="green">send</button>
+    </div>
+  </div>
+
+</body>
+
 </html>

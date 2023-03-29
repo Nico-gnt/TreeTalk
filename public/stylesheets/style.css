@@ -37,5 +37,28 @@ button {
   overflow-x: hidden;
   border: 2px solid white;
   border-radius: 15px 0 0 15px;
+}
 
+#message {
+  width: 50%;
+}
+
+#login {
+  width: 10vw;
+}
+
+#boxsendmessage {
+  width: 100%;
+  display: inline;
+}
+
+input {
+  margin-top: 10px;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 7px;
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  box-shadow: none;
 }
