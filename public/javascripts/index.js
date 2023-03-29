@@ -13,7 +13,7 @@ document.addEventListener("keydown", appuyerSurEntree);
 function sendMessage() {
     if (message == "")
         return;
-    var message = document.getElementById("login").value + " : "+document.getElementById("message").value;
+    var message = document.getElementById("login").value + " : "+ document.getElementById("message").value;
     // clear input
     document.getElementById("message").value = "";
 
@@ -53,8 +53,13 @@ function updateMessage() {
             var messages = document.getElementById("messages");
             messages.innerHTML = "";
             for (var i = 0; i < messagesList.length; i++) {
-                var message = data[i];
-                messages.innerHTML += message + "<br>"
+                var message = messagesList[i];
+                var messageElement = document.createElement('div');
+                messageElement.innerHTML = message;
+                messageElement.classList.add('sent-message');
+                messages.appendChild(messageElement);
+                var username = message.split(" : ")[0];
+            messageElement.innerHTML = "<span class='username'>" + username + "</span>" + message.replace(username + " : ", " ");
             }
         });
 }

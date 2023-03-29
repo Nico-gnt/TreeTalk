@@ -30,14 +30,6 @@ button {
   font-size: 14.5px;
 }
 
-#messages {
-  margin-top: 20px;
-  overflow: scroll;
-  max-height: 50vh;
-  overflow-x: hidden;
-  border: 2px solid white;
-  border-radius: 15px 0 0 15px;
-}
 
 #message {
   width: 50%;
@@ -61,4 +53,21 @@ input {
   color: rgb(0, 0, 0);
   background-color: rgb(255, 255, 255);
   box-shadow: none;
+}
+
+.sent-message {
+  background-color: rgb(4, 155, 7);
+  color: white;
+  padding: 10px;
+  border-radius: 15px 0 15px 15px;
+  text-align: right;
+  margin: 10px 0;
+}
+
+.username {
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  display: flex;
+
 }
