@@ -13,7 +13,7 @@ document.addEventListener("keydown", appuyerSurEntree);
 function sendMessage() {
     if (message == "")
         return;
-    var message = document.getElementById("message").value;
+    var message = document.getElementById("login").value + " : "+document.getElementById("message").value;
     // clear input
     document.getElementById("message").value = "";
 
