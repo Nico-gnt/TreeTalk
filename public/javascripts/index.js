@@ -66,9 +66,8 @@ function updateMessage() {
                 messages.innerHTML += `<div class="textMessage">
                     ${message}
                 </div>`
-                
-                 
             }
+            messages.scrollTop = messages.scrollHeight;
         });
 }
 
