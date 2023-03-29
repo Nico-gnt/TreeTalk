@@ -1,8 +1,41 @@
+* {
+  color: white;
+}
+
+html {
+  background-color: rgb(45, 45, 45);
+}
+
 body {
+  text-align: center;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+input {
+  color: black;
+}
+
+.green {
+  background-color: rgb(4, 155, 7);
+}
+
+button {
+  width: 45px;
+  height: 25px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin: 5px;
+  font-size: 14.5px;
+}
+
+#messages {
+  margin-top: 20px;
+  overflow: scroll;
+  max-height: 50vh;
+  overflow-x: hidden;
+  border: 2px solid white;
+  border-radius: 15px 0 0 15px;
+
 }
