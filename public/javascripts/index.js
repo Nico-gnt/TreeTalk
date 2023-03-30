@@ -59,7 +59,7 @@ function updateMessage() {
                 if (hashtag != null) {
                     // hastag is a array replace all the element
                     for (var x = 0; x < hashtag.length; x++) {
-                        message = message.replace(hashtag[x], `<span class="greenText">${hashtag[x]}</span>`);
+                        message = message.replace(hashtag[x], `<span class="hashagColor">${hashtag[x]}</span>`);
                     }
                 }
                 var messageElement = document.createElement('div');

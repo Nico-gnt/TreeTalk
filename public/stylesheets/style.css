@@ -70,3 +70,8 @@ input {
   display: flex;
 
 }
+
+.hashagColor{
+  color: black;
+  font-weight: bold;
+}
