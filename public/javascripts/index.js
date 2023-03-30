@@ -53,6 +53,7 @@ function updateMessage() {
             var messages = document.getElementById("messages");
             messages.innerHTML = "";
             for (var i = 0; i < messagesList.length; i++) {
+<<<<<<< HEAD
                 var message = messagesList[i];
                 var messageElement = document.createElement('div');
                 messageElement.innerHTML = message;
@@ -60,7 +61,23 @@ function updateMessage() {
                 messages.appendChild(messageElement);
                 var username = message.split(" : ")[0];
             messageElement.innerHTML = "<span class='username'>" + username + "</span>" + message.replace(username + " : ", " ");
+=======
+                var message = data[i];
+                // if in message there is a #text change the color of the #text
+                var hashtag = message.match(/#[a-zA-Z0-9]+/g);
+                console.log(hashtag);
+                if (hashtag != null) {
+                    // hastag is a array replace all the element
+                    for (var x = 0; x < hashtag.length; x++) {
+                        message = message.replace(hashtag[x], `<span class="greenText">${hashtag[x]}</span>`);
+                    }
+                }
+                messages.innerHTML += `<div class="textMessage">
+                    ${message}
+                </div>`
+>>>>>>> 1d5fffedaa2433119c12a2e9a9dcb4cfbb02f4a4
             }
+            messages.scrollTop = messages.scrollHeight;
         });
 }
 
