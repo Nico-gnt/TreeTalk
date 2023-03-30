@@ -30,17 +30,7 @@ button {
   font-size: 14.5px;
 }
 
-<<<<<<< HEAD=======#messages {
-  margin-top: 20px;
-  overflow: scroll;
-  max-height: 50vh;
-  overflow-x: hidden;
-  border: 2px solid white;
-  border-radius: 10px;
-  padding-bottom: 15px;
-}
-
->>>>>>>1d5fffedaa2433119c12a2e9a9dcb4cfbb02f4a4 #message {
+#message {
   width: 50%;
 }
 
