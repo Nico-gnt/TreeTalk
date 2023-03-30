@@ -53,17 +53,7 @@ function updateMessage() {
             var messages = document.getElementById("messages");
             messages.innerHTML = "";
             for (var i = 0; i < messagesList.length; i++) {
-
                 var message = messagesList[i];
-                var messageElement = document.createElement('div');
-                messageElement.innerHTML = message;
-                messageElement.classList.add('sent-message');
-                messages.appendChild(messageElement);
-                var username = message.split(" : ")[0];
-            messageElement.innerHTML = "<span class='username'>" + username + "</span>" + message.replace(username + " : ", " ");
-
-                var message = data[i];
-                // if in message there is a #text change the color of the #text
                 var hashtag = message.match(/#[a-zA-Z0-9]+/g);
                 console.log(hashtag);
                 if (hashtag != null) {
@@ -72,9 +62,14 @@ function updateMessage() {
                         message = message.replace(hashtag[x], `<span class="greenText">${hashtag[x]}</span>`);
                     }
                 }
-                messages.innerHTML += `<div class="textMessage">
-                    ${message}
-                </div>`
+                var messageElement = document.createElement('div');
+                
+                messageElement.classList.add('sent-message');
+                messages.appendChild(messageElement);
+                var username = message.split(" : ")[0];
+            messageElement.innerHTML = "<span class='username'>" + username + "</span>" + message.replace(username + " : ", " ");
+
+                
             }
             messages.scrollTop = messages.scrollHeight;
         });
