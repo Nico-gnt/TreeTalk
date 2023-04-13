@@ -75,3 +75,21 @@ input {
   color: black;
   font-weight: bold;
 }
+
+nav{
+  position: sticky;
+}
+
+a {
+  float: center;
+  font-size: 16px;
+  background-color: rgb(4, 155, 7);
+  text-align: center;
+  padding: 12px 20px;
+  text-decoration: none;
+  border-radius: 90px;
+}
+
+a:hover{
+  background-color: rgb(4, 131, 6);
+}
