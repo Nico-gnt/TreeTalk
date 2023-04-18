@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+router.use('/public', express.static('public'));
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'TreeTalk' });
@@ -15,6 +17,7 @@ router.get('/Profil', function(req, res, next) {
 router.get('/Search', function(req, res, next) {
     res.render('search', { title: 'TreeTalk' });
   });
+
 
 
 messages = [];
