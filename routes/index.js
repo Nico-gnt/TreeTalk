@@ -6,6 +6,16 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'TreeTalk' });
 });
 
+/* GET profil page. */
+router.get('/Profil', function(req, res, next) {
+    res.render('profil', { title: 'TreeTalk' });
+  });
+
+  /* GET search page. */
+router.get('/Search', function(req, res, next) {
+    res.render('search', { title: 'TreeTalk' });
+  });
+
 
 messages = [];
 router.get('/getMessages', function(req, res, next) {
