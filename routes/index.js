@@ -4,31 +4,54 @@ var router = express.Router();
 router.use('/public', express.static('public'));
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('index', { title: 'TreeTalk' });
 });
 
 /* GET profil page. */
-router.get('/Profil', function(req, res, next) {
-    res.render('profil', { title: 'TreeTalk' });
-  });
-
-  /* GET search page. */
-router.get('/Search', function(req, res, next) {
-    res.render('search', { title: 'TreeTalk' });
-  });
-
-
-
-messages = [];
-router.get('/getMessages', function(req, res, next) {
-    res.json(messages);
+router.get('/Profil', function (req, res, next) {
+  res.render('profil', { title: 'TreeTalk' });
 });
 
-router.post('/sendMessage', function(req, res, next) {
-    var message = req.body.message;
-    messages.push(message);
-    res.json({message: "Message received"});
+/* GET search page. */
+router.get('/Search', function (req, res, next) {
+  res.render('search', { title: 'TreeTalk' });
+});
+
+
+//get rechercher
+router.post("/rechercher", function (req, res, next) {
+  const rechercherTerm = req.body.rechercher;
+
+  res.cookie('rechercherTerm', rechercherTerm)
+
+  res.send("");
+});
+
+
+
+router.get('/getMessages', function (req, res, next) {
+  // vérifier si le cookie "rechercher" est présent
+  if (!req.cookies.rechercher) {
+    return res.json(messages);
+  }
+
+  const searchTerm = req.cookies.rechercher;
+  res.clearCookie('rechercher');
+  const messagesFliter = messages.filter(message => message.includes("#"+searchTerm));
+  return res.json(messagesFliter);
+
+});
+
+messages = [];
+router.get('/getMessages', function (req, res, next) {
+  res.json(messages);
+});
+
+router.post('/sendMessage', function (req, res, next) {
+  var message = req.body.message;
+  messages.push(message);
+  res.json({ message: "Message received" });
 });
 
 
@@ -64,7 +87,7 @@ router.post('/webhook', (req, res) => {
   const digest = 'sha1=' + hmac.update(JSON.stringify(req.body)).digest('hex');
   const checksum = req.headers['x-hub-signature'];
   if (!checksum || !digest || checksum !== digest) {
-      return res.status(403).send('Invalid signature for webhook');
+    return res.status(403).send('Invalid signature for webhook');
   }
 
   // get current dir
@@ -73,13 +96,13 @@ router.post('/webhook', (req, res) => {
   const dir = currentDir.replace('/routes', '');
   console.log('current dir: ' + currentDir);
   exec('cd /home/ubuntu/back_end_TreeTalk && git reset --hard HEAD && git pull && npm install && pm2 restart app', (error, stdout, stderr) => {
-      if (error) {
-          console.error(`exec error: ${error}`);
-          return res.status(500).send(`Error updating app: ${error}`);
-      }
-      console.log(`stdout: ${stdout}`);
-      console.log(`stderr: ${stderr}`);
-      res.send('App updated successfully!');
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return res.status(500).send(`Error updating app: ${error}`);
+    }
+    console.log(`stdout: ${stdout}`);
+    console.log(`stderr: ${stderr}`);
+    res.send('App updated successfully!');
   });
 });
 

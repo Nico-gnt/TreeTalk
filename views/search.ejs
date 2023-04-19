@@ -6,8 +6,7 @@
     <%= title %>
   </title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-  <script defer src="/javascripts/index.js"></script>
+  <script defer src="/javascripts/search.js"></script>
 </head>
 
 <body>
@@ -23,7 +22,8 @@
   </h1>
   <div>
     <h1>Search</h1>
-    <input type="text" placeholder="Rechercher">
+    <input id="rechercher" type="text" placeholder="Rechercher">
+    <button id="btnRechercher" style="width: 90px;" class="green">Rechercher</button>
   </div>
 
 </body>
