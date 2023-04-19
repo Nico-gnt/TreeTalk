@@ -43,9 +43,14 @@ router.get("/clearDB", function (req, res, next) {
 
 
 router.post('/sendMessage', function (req, res, next) {
-  // check if user is connected
   if (!req.session.userName) {
     return res.status(401).json({ message: "Vous devez être connecté pour envoyer un message" });
+  }
+  if(!req.body.message){
+    return res.status(400).json({ message: "Vous devez écrire un message" });
+  }
+  if (req.body.message.length <= 0) {
+    return res.status(400).json({ message: "Vous devez écrire un message" });
   }
 
   var message =  req.session.userName + " : " + req.body.message;

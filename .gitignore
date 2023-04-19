@@ -16,3 +16,4 @@ yarn.lock
 # Dépendances spécifiques à un système d'exploitation
 .DS_Store
 Thumbs.db
+sessions.db

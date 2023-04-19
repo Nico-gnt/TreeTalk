@@ -82,6 +82,7 @@ function updateMessage(withSearch) {
 
 
             }
+            // scrool at the bot 
             messages.scrollTop = messages.scrollHeight;
         });
 }
