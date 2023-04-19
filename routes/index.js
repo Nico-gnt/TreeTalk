@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+const database = require("../database/database");
+
+
 
 router.use('/public', express.static('public'));
 
@@ -31,27 +34,50 @@ router.post("/rechercher", function (req, res, next) {
 
 
 router.get('/getMessages', function (req, res, next) {
-  // vérifier si le cookie "rechercher" est présent
-  if (!req.cookies.rechercher) {
-    return res.json(messages);
-  }
+  database.getMessages((err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: "Erreur serveur" });
+    }
+    messages = result;
+    const listeMessages = messages.map((message) => {
+      return message.messages;
+    });
 
-  const searchTerm = req.cookies.rechercher;
-  res.clearCookie('rechercher');
-  const messagesFliter = messages.filter(message => message.includes("#"+searchTerm));
-  return res.json(messagesFliter);
+    if (!req.cookies.rechercher) {
+      return res.json(listeMessages);
+    }
+
+    const searchTerm = req.cookies.rechercher;
+    res.clearCookie('rechercher');
+    const messagesFliter = listeMessages.filter(message => message.includes("#" + searchTerm));
+    return res.json(messagesFliter);
+  });
 
 });
 
-messages = [];
-router.get('/getMessages', function (req, res, next) {
-  res.json(messages);
+router.get("/clearDB", function (req, res, next) {
+  database.clearMessages((err, result) => {
+    res.send("DB cleared");
+  });
 });
+
 
 router.post('/sendMessage', function (req, res, next) {
   var message = req.body.message;
-  messages.push(message);
-  res.json({ message: "Message received" });
+  //message is in to part user : message get the two
+  const messageplit = message.split(":");
+  const message54 = message[1];
+  const user = message[0];
+
+  console.log(message)
+  database.ajouterMessage(0, message, (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ message: "Erreur serveur" });
+    }
+    return res.json({ message: "Message envoyé" });
+  });
 });
 
 

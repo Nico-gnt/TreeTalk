@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var http = require('http');
 var debug = require('debug')('back-end-treetalk:server');
+const database = require("./database/database");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

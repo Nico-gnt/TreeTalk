@@ -83,4 +83,17 @@ socket.on('chat message', () => {
 });
 
 
+document.getElementById("clearDB").addEventListener("click", function () {
+    fetch("/clearDB", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(function (response) {
+            // refresh page
+            document.location.href = "/";
+        })
+});            
+
 updateMessage();
