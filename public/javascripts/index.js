@@ -1,3 +1,6 @@
+const rechercher = document.getElementById("rechercher");
+const btnRechercher = document.getElementById("btnRechercher");
+
 document.getElementById("sendBtn").addEventListener("click", function () {
     sendMessage();
 });
@@ -13,7 +16,7 @@ document.addEventListener("keydown", appuyerSurEntree);
 function sendMessage() {
     if (message == "")
         return;
-    var message = document.getElementById("login").value + " : "+ document.getElementById("message").value;
+    var message = document.getElementById("message").value;
     // clear input
     document.getElementById("message").value = "";
 
@@ -37,12 +40,20 @@ function sendMessage() {
 
 let messagesList = [];
 
-function updateMessage() {
+function updateMessage(withSearch) {
+    rechercherValue = "";
+    if (withSearch == true) {
+        rechercherValue = rechercher.value;
+    }
+
     fetch("/getMessages", {
-        method: "GET",
+        method: "POST",
         headers: {
             "Content-Type": "application/json"
-        }
+        },
+        body: JSON.stringify({
+            rechercher: rechercherValue
+        })
     })
         .then(function (response) {
             return response.json();
@@ -63,13 +74,13 @@ function updateMessage() {
                     }
                 }
                 var messageElement = document.createElement('div');
-                
+
                 messageElement.classList.add('sent-message');
                 messages.appendChild(messageElement);
                 var username = message.split(" : ")[0];
-            messageElement.innerHTML = "<span class='username'>" + username + "</span>" + message.replace(username + " : ", " ");
+                messageElement.innerHTML = "<span class='username'>" + username + "</span>" + message.replace(username + " : ", " ");
 
-                
+
             }
             messages.scrollTop = messages.scrollHeight;
         });
@@ -94,6 +105,19 @@ document.getElementById("clearDB").addEventListener("click", function () {
             // refresh page
             document.location.href = "/";
         })
-});            
+});
+
+if (document.getElementById("log-or-signup")) {
+    document.getElementById("log-or-signup").addEventListener("click", function () {
+        document.location.href = "/profil";
+    });
+}
+
+
+btnRechercher.addEventListener("click", () => {
+    updateMessage(true);
+});
 
 updateMessage();
+
+

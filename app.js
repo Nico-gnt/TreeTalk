@@ -6,11 +6,28 @@ var logger = require('morgan');
 var http = require('http');
 var debug = require('debug')('back-end-treetalk:server');
 const database = require("./database/database");
+const session = require('express-session');
+const SQLiteStore = require('connect-sqlite3')(session);
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var profilRouter = require('./routes/profil');
 
 var app = express();
+
+
+const store = new SQLiteStore({
+  db: 'sessions.db',
+  concurrentDB: true
+});
+
+app.use(session({
+  secret: 'my_secret_key',
+  resave: false,
+  saveUninitialized: true,
+  store: store
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,16 +39,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 app.use('/', indexRouter);
+app.use('/profil', profilRouter);
 app.use('/users', usersRouter);
 
+
+
+
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -64,16 +87,20 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-// do a emit to all connected clients if a new message is received
 io.on('connection', (socket) => {
   console.log('a user connected');
+  console.log(socket.request.session);
+
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
-  socket.on('chat message', () => {
-    io.emit('chat message');
+
+  socket.on('chat message', (msg) => {
+    console.log('message: ' + msg);
+    io.emit('chat message', msg);
   });
 });
+
 
 server.listen(port);
 server.on('error', onError);

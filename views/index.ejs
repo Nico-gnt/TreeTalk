@@ -8,14 +8,14 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
   <script defer src="/javascripts/index.js"></script>
+  <script defer src="/javascripts/search.js"></script>
 </head>
 
 <body>
   <img src="/public/logo.png" alt="Logo TreeTalk" id="logo">
-  
+
   <nav id="NavBar">
     <a href="/">Home</a>
-    <a href="Search">Search</a>
     <a href="Profil">Profil</a>
   </nav>
   <h1>
@@ -23,17 +23,33 @@
   </h1>
   <p>Welcome to <%= title %>
   </p>
+  <% if (typeof userName !=='undefined' ) { %>
+      <a href="/users/disconnect" class="green">disconnect</a>
+    <% } %>
   <button id="clearDB" class="green">Clear</button>
+  <div id="search-div">
+    <input id="rechercher" type="text" placeholder="Rechercher">
+    <button id="btnRechercher" style="width: 90px;" class="green">Rechercher</button>
+  </div>
 
-    <div id="messages">
+  <div id="messages">
 
-    </div>
-    <div id="boxsendmessage">
+  </div>
+  <div id="boxsendmessage">
+    <% if (typeof userName !=='undefined' ) { %>
       <span>Choisis ton pseudo :</span>
-      <input type="text" name="" id="login" placeholder="Anonyme">
       <input type="text" name="" id="message" placeholder="Message">
       <button id="sendBtn" class="green">send</button>
-    </div>
+      <% } else { %>
+        <button style="width: 120px;" id="log-or-signup" class="green">login or sign up</button>
+
+        <input disabled style="display:none;" type="text" name="" id="message" placeholder="Message">
+        <button disabled style="display:none;" id="sendBtn" class="green">send</button>
+        <% } %>
+
+  </div>
+
+
   </div>
 
 </body>

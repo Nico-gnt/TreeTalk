@@ -8,32 +8,11 @@ router.use('/public', express.static('public'));
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'TreeTalk' });
-});
-
-/* GET profil page. */
-router.get('/Profil', function (req, res, next) {
-  res.render('profil', { title: 'TreeTalk' });
-});
-
-/* GET search page. */
-router.get('/Search', function (req, res, next) {
-  res.render('search', { title: 'TreeTalk' });
+  res.render('index', { title: 'TreeTalk', userName: req.session.userName });
 });
 
 
-//get rechercher
-router.post("/rechercher", function (req, res, next) {
-  const rechercherTerm = req.body.rechercher;
-
-  res.cookie('rechercherTerm', rechercherTerm)
-
-  res.send("");
-});
-
-
-
-router.get('/getMessages', function (req, res, next) {
+router.post('/getMessages', function (req, res, next) {
   database.getMessages((err, result) => {
     if (err) {
       console.log(err);
@@ -44,11 +23,11 @@ router.get('/getMessages', function (req, res, next) {
       return message.messages;
     });
 
-    if (!req.cookies.rechercher) {
+    if (req.body.rechercher === "") {
       return res.json(listeMessages);
     }
 
-    const searchTerm = req.cookies.rechercher;
+    const searchTerm = req.body.rechercher;
     res.clearCookie('rechercher');
     const messagesFliter = listeMessages.filter(message => message.includes("#" + searchTerm));
     return res.json(messagesFliter);
@@ -64,14 +43,14 @@ router.get("/clearDB", function (req, res, next) {
 
 
 router.post('/sendMessage', function (req, res, next) {
-  var message = req.body.message;
-  //message is in to part user : message get the two
-  const messageplit = message.split(":");
-  const message54 = message[1];
-  const user = message[0];
+  // check if user is connected
+  if (!req.session.userName) {
+    return res.status(401).json({ message: "Vous devez être connecté pour envoyer un message" });
+  }
 
-  console.log(message)
-  database.ajouterMessage(0, message, (err, result) => {
+  var message =  req.session.userName + " : " + req.body.message;
+
+  database.ajouterMessage(req.session.userName, message, (err, result) => {
     if (err) {
       console.log(err);
       return res.status(500).json({ message: "Erreur serveur" });

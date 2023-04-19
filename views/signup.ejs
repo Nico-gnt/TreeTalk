@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script defer src="/javascripts/signup.js"></script>
+</head>
+<body>
+    <img src="/public/logo.png" alt="Logo TreeTalk" id="logo">
+    <nav id="NavBar">
+        <a href="/">Home</a>
+        <a href="Profil">Profil</a>
+    </nav>
+    <h1>
+        <%= title %>
+    </h1>
+    <div>
+        <h1>signup</h1>
+        <label for="userName">userName :</label>
+        <input type="text" name="userName" id="userName">
+        <br>
+        <label for="Password">Password :</label>
+        <input type="password" name="Password" id="password">
+        <br>
+        <button style="width: 70px;" id="signup" class="green">signup</button>
+    </div>
+    <div style="height: 50px;">
+
+    </div>
+    <a href="/profil" class="green">login</a>
+
+</body>
+
+</html>
