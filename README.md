@@ -39,3 +39,4 @@ Voici le lien du Trello : https://trello.com/b/tP6Zod7v/projet-twitter-like
 
 Lors de la réalisation de ce projet, nous avons passé à la fois du temps en cours de Gestion de Projet, mais également en dehors de ces heures de cours pour travailler sur le projet. Nous avons passé environ 3 - 4 heures en plus par semaine à y travailler. Nous en sommes arrivés pour l'instant au résultat actuel, le site possède un onglet Accueil permettant de voir les publications de tout le monde. Il y a une box pour la création de message, il est possible de mettre des tags. Également, nous pouvons filtrer les messages par du texte ou encore par des tags. Nous retrouvons aussi un onglet Profil permettant de se connecter et/ou de créer un compte. Nous avons mis en place la mise à jour automatique du code via un push.
 
+![alt text] (https://raw.githubusercontent.com/Nico-gnt/TreeTalk/main/20230503_175246.jpg)
